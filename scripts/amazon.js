@@ -92,6 +92,6 @@ document.querySelectorAll('.js-add-to-cart').forEach(button => {
 		timeouts[productId] = setTimeout(() => {
 			addedMessage.classList.remove('added-to-cart-visible');
 		}, 2000);
-		console.log(timeouts);
+		// console.log(timeouts);
 	});
 });
