@@ -115,17 +115,6 @@ document.querySelectorAll('.delete-link-js').forEach(link => {
 	});
 });
 
-// updateQuantityItemToHeaderCart
-// function updateCartQuantity() {
-// 	let cartQuantity = 0;
-
-// 	cart.forEach(cartItem => {
-// 		cartQuantity += cartItem.quantity;
-// 	});
-
-// 	document.querySelector('.quantity-items-js').innerHTML = cartQuantity;
-// }
-
 document.addEventListener('DOMContentLoaded', function () {
 	calculateCartQuantity();
 });
