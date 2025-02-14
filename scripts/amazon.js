@@ -2,6 +2,10 @@ import { cart, addToCart, calculateCartQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
+document.addEventListener('DOMContentLoaded', function () {
+	calculateCartQuantity();
+});
+
 let productsHTML = '';
 
 products.forEach(product => {
@@ -87,6 +91,3 @@ document.querySelectorAll('.js-add-to-cart').forEach(button => {
 	});
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-	calculateCartQuantity();
-});
