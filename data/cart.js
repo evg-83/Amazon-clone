@@ -5,12 +5,15 @@ if (!cart) {
 		{
 			productId: '1',
 			quantity: 2,
+			deliveryOptionsId: '1'
 		},
 		{
 			productId: '2',
 			quantity: 3,
+			deliveryOptionsId: '2'
 		},
 	];
+	saveToStorage()
 }
 
 function saveToStorage() {
@@ -38,6 +41,7 @@ export function addToCart(productId) {
 		cart.push({
 			productId,
 			quantity,
+			deliveryOptionsId,
 		});
 	}
 
