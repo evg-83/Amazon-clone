@@ -1,26 +1,32 @@
-export let cart = JSON.parse(localStorage.getItem('cart'));
+export let cart;
 
-if (!cart) {
-	cart = [
-		{
-			productId: '1',
-			quantity: 2,
-			deliveryOptionsId: '1'
-		},
-		{
-			productId: '2',
-			quantity: 3,
-			deliveryOptionsId: '2'
-		},
-	];
-	saveToStorage()
+loadFromStorage();
+
+export function loadFromStorage() {
+	cart = JSON.parse(localStorage.getItem('cart'));
+
+	if (!cart) {
+		cart = [
+			{
+				productId: '1',
+				quantity: 2,
+				deliveryOptionsId: '1'
+			},
+			{
+				productId: '2',
+				quantity: 3,
+				deliveryOptionsId: '2'
+			},
+		];
+		saveToStorage()
+	}
 }
 
 function saveToStorage() {
 	localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-export function addToCart(productId) {
+export function addToCart(productId, quantity = null) {
 	let matchingItem;
 
 	cart.forEach(cartItem => {
@@ -29,11 +35,17 @@ export function addToCart(productId) {
 		}
 	});
 
-	const quantitySelector = document.querySelector(
-		`.js-quantity-selector-${productId}`
-	);
+	if (quantity === null) {
+		const quantitySelector = document.querySelector(
+			`.js-quantity-selector-${productId}`
+		)
 
-	const quantity = Number(quantitySelector.value);
+		if (!quantitySelector) {
+            throw new Error(`Quantity selector for product ID ${productId} not found.`);
+        }
+
+		quantity = Number(quantitySelector.value)
+	}
 
 	if (matchingItem) {
 		matchingItem.quantity += quantity;
@@ -70,7 +82,9 @@ export function calculateCartQuantity() {
 
 	const cartQuantityItem = cartQuantity <= 1 ? 'item' : 'items'
 
-	document.querySelector('.quantity-items-js').innerHTML = `${cartQuantity} ${cartQuantityItem}`;
+	document.querySelector('.quantity-items-js')
+		? document.querySelector('.quantity-items-js').innerHTML = `${cartQuantity} ${cartQuantityItem}`
+		: document.querySelector('.amazon-quantity-items-js').innerHTML = cartQuantity
 }
 
 export function updateQuantity(productId, newQuantity) {
